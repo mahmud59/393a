@@ -1,0 +1,46 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int main()
+{
+    int n, i, j;
+    while((scanf("%d", &n)) != EOF)
+    {
+        long int a[n], x[n], y[n], c, d, m;
+        for(i=0; i<n; i++)
+        {
+            cin>>a[i];
+        }
+        cin>>m;
+        for(i=0; i<n; i++)
+        {
+            for(j=i+1; j<n; j++)
+            {
+                if(a[i] + a[j] == m)
+                {
+                    x[i] = min(a[i], a[j]);
+                    y[i] = max(a[i], a[j]);
+                }
+            }
+        }
+        for(i=0; i<n; i++)
+        {
+            if((x[i] != 0) and (y[i] != 0))
+            {
+                c = x[i];
+                d = y[i];
+            }
+            if((x[i+1] != 0) and (y[i+1] != 0))
+            {
+                if((d - c) > (y[i+1] - x[i+1]))
+                {
+                    c = x[i+1];
+                    d = y[i+1];
+                }        
+            }
+        }
+        cout<<"Peter should buy books whose prices are "<<c<<" and "<<d<<"."<<endl<<endl;
+    }
+    
+    return 0;
+}
