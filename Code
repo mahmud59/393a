@@ -1,12 +1,16 @@
-#include<iostream>
-#include<algorithm>
+
+
+#include <iostream>
+#include <algorithm>
+
 using namespace std;
+
 int main()
 {
-    int n, i, j;
+    int n, i, j, c=0, mark;
     while((scanf("%d", &n)) != EOF)
     {
-        long int a[n], x[n], y[n], c, d, m;
+        long long int a[n], small[n], big[n], diff[n], m;
         for(i=0; i<n; i++)
         {
             cin>>a[i];
@@ -18,29 +22,35 @@ int main()
             {
                 if(a[i] + a[j] == m)
                 {
-                    x[i] = min(a[i], a[j]);
-                    y[i] = max(a[i], a[j]);
+                    c++;
+                    small[c] = min(a[i], a[j]);
+                    big[c] = max(a[i], a[j]);
                 }
             }
         }
-        for(i=0; i<n; i++)
+        if(c>1)
         {
-            if((x[i] != 0) and (y[i] != 0))
+            for(i=1; i<=c; i++)
             {
-                c = x[i];
-                d = y[i];
+                diff[i] = big[i] - small[i];
             }
-            if((x[i+1] != 0) and (y[i+1] != 0))
+            for(i=1; i<c; i++)
             {
-                if((d - c) > (y[i+1] - x[i+1]))
+                if(diff[i] < diff[i+1])
                 {
-                    c = x[i+1];
-                    d = y[i+1];
-                }        
+                    mark = i;
+                }
+                else
+                {
+                    mark = i+1;
+                }
             }
         }
-        cout<<"Peter should buy books whose prices are "<<c<<" and "<<d<<"."<<endl<<endl;
+        else
+        {
+            mark = 1;
+        }
+        cout<<"Peter should buy books whose prices are "<<small[mark]<<" and "<<big[mark]<<"."<<endl<<endl;
     }
-    
     return 0;
 }
