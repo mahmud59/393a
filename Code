@@ -1,5 +1,3 @@
-
-
 #include <iostream>
 #include <algorithm>
 
@@ -11,7 +9,7 @@ int main()
     while((scanf("%d", &n)) != EOF)
     {
         c = 0;
-        long long int a[n], small[n], big[n], diff[n], m;
+        long long int a[n], small[n], big[n], diff[n], m, ad;
         for(i=0; i<n; i++)
         {
             cin>>a[i];
@@ -35,15 +33,16 @@ int main()
             {
                 diff[i] = big[i] - small[i];
             }
-            for(i=1; i<c; i++)
+            ad = diff[1];
+            for(i=1; i<=c; i++)
             {
-                if(diff[i] < diff[i+1])
+                ad = min(ad, diff[i]);
+            }
+            for(i=1; i<=c; i++)
+            {
+                if(ad == (big[i] - small[i]))
                 {
                     mark = i;
-                }
-                else
-                {
-                    mark = i+1;
                 }
             }
         }
