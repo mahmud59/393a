@@ -10,6 +10,7 @@ int main()
     int n, i, j, c=0, mark;
     while((scanf("%d", &n)) != EOF)
     {
+        c = 0;
         long long int a[n], small[n], big[n], diff[n], m;
         for(i=0; i<n; i++)
         {
