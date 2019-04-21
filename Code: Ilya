@@ -53,24 +53,22 @@ int loop_i(int a[], int i, int n, int l[], int maxL)
 {
     maxL = loop_j(a, i, n-1, l, maxL);
     
-    if ( maxL == -1)
+    if (i+1 != n-1)
     {
-        if (i+1 != n)
-        {
-            loop_i(a, i+1, n, l, maxL);
-        }
-        else
-        {
-            return maxL;
-        }
+        loop_i(a, i+1, n, l, maxL);
     }
+    else
+    {
+        return maxL;
+    }
+    
 }
 
 int loop_j(int a[], int x, int j, int l[], int maxL)
 {
     int k;
-    if (j == x) return -1;
-    else if (a[x] != a[j])
+    //if (j == x) return -1;
+    /*else*/ if (a[x] != a[j])
     {
         c++;
         l[c-1] = j-x;
