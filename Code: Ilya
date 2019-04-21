@@ -1,0 +1,69 @@
+
+#include <iostream>
+using namespace std;
+int loop_j(int a[], int x, int j, int l[], int maxL);
+int loop_i(int a[], int i, int n, int l[], int maxL);
+int c=0;
+int main()
+{
+    int n, i, j, maxL;
+    cin>>n;
+    int a[n], l[n];
+    for(i=0; i<n; i++)
+    {
+        cin>>a[i];
+        l[i] = 0;
+    }
+    /*for(i=0; i<n; i++)
+    {
+        l[i] = 0;
+        for(j=n-1; j>i; j--)
+        {
+            if(a[i] != a[j])
+            {
+                c++;
+                l[c-1] = j-i;
+                break;
+            }
+        }
+    }
+    */
+    i=0;
+    maxL =  loop_i(a, i, n, l, maxL);
+    cout<<maxL;
+    return 0;
+}
+int loop_i(int a[], int i, int n, int l[], int maxL)
+{
+    if ( loop_j(a, i, n-1, l, maxL) == -1)
+    {
+        if (i+1 != n)
+        {
+            maxL = loop_j(a, i, n-1, l, maxL);
+            loop_i(a, i+1, n, l, maxL);
+        }
+        else
+        {
+            return loop_j(a, i, n-1, l, maxL);
+        }
+    }
+}
+int loop_j(int a[], int x, int j, int l[], int maxL)
+{
+    int k;
+    if (j == x) return -1;
+    else if (a[x] != a[j])
+    {
+        c++;
+        l[c-1] = j-x;
+        for(k=0; k<c; k++)
+        {
+            maxL = max(maxL, l[k]);
+        }
+        return maxL;
+    }
+    else loop_j(a, x, j-1, l, maxL);
+}
+
+
+
