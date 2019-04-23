@@ -1,0 +1,111 @@
+//explanation at the bottom
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+//declaring variables globally, for ease.
+int i, j, maxl, c, kick, kick2;
+
+int maxL(int a[], int ln[], int f, int l)
+{
+    //kick=0; this part is commented out, you'll understand when u go further down
+    //kick2=0;
+    
+    int m = (f+l)/2;
+    
+    for(j=l; j != m; j--)
+    {
+        if((a[f] != a[m]) && (kick == 0))
+        {
+            c++;
+            ln[c-1] = m-f;
+            kick++;
+        }
+        if(a[f] != a[j])
+        {
+            c++;
+            ln[c-1] = j-f;
+            break;
+        }
+    }
+    
+    for(i=f; i != m; i++)
+    {
+        if((a[l] != a[m]) && (kick2 == 0))
+        {
+            c++;
+            ln[c-1] = l-m;
+            kick2++;
+        }
+        if(a[l] != a[i])
+        {
+            c++;
+            ln[c-1] = l-i;
+            break;
+        }
+    }
+    
+    for(i=0; i<c; i++)
+    {
+        maxl = max(maxl, ln[i]);
+    }
+    
+    /* This part is for if the initial iteration doesn't work. 
+    This scenario is highly unlikely (Check it and do the math). So i have 
+    commented out this part.
+    int swap;
+    if (c == 0)
+    {
+        swap = l;
+        l = m-1;
+        maxL(a, ln, f, l);
+        
+        l = swap;
+        f = m+1;
+        maxL(a, ln, f, l);
+    }
+    
+    else*/ return maxl;
+}
+
+int main()
+{
+  int n;
+  cin>>n;
+  int a[n], ln[n];
+  for(i=0; i<n; i++)
+  {        
+      cin>>a[i];
+      ln[i] = 0; 
+  }
+  
+  int f=0, l=n-1;
+  maxl = maxL(a, ln, f, l);
+  cout<<maxl;
+}
+
+//the idea for this algorithm has been taken from binary search.
+/*
+Explanation: 
+
+7 
+1 1 3 1 1 1 1
+
+
+in the above input, if the f(irst) variable's
+value is 0, l(ast) is 6, then m(iddle) is 3.
+
+7 <- array size
+1 1 3 1 1 1 1 <- Array elements
+0 1 2 3 4 5 6 <- Array Positions
+f     m     l <- Variables
+
+first, i'll use the f(irst) position and compare it with
+ values from m(iddle) to l(ast).
+ 
+ then, i'll use the l(ast) position and compare it with
+ values from f(irst) to m(iddle).
+
+...and its done.
+*/
