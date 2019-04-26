@@ -1,0 +1,57 @@
+// Example program
+#include <iostream>
+#include <string>
+using namespace std;
+
+int gcd(int x, int n)
+{
+    int r = n%x;
+    if (r == 0)
+    {
+        return x;
+    }
+    while (r != 0)
+    {
+        n=x;
+        x=r;
+        r=n%x;
+    }
+    return x;
+}
+
+int main()
+{
+  int a, b, n, z, c=0;
+  cin>>a>>b>>n;
+  while(n>=0)
+  {
+      if(c%2 == 0)
+      {
+          z = gcd(a,n);
+          if (n>=z) 
+          {
+              n-=z;
+              c++;
+          }
+          else
+          {
+              cout<<"1";
+              break;
+          }
+      }
+      else
+      {
+          z = gcd(b,n);
+          if (n>=z) 
+          {
+              n-=z;
+              c++;
+          }
+          else
+          {
+              cout<<"0";
+              break;
+          }
+      }
+  }
+}
